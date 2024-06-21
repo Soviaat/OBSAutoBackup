@@ -2,4 +2,5 @@
 
  For the ones who say `"ew, it's written in python"` stfu, it's either python or lua.
 
-<h6>Shout out to Sube22 for contributing with his idea.</h6>
+> [!NOTE]
+> Shout out to @Sube22 for contributing with his idea.</h6>

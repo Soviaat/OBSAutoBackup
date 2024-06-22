@@ -1,7 +1,4 @@
-/clock-source
-/clock-source.lua
-/countdown.lua
-/instant-replay.lua
-/pause-scene.lua
-/url-text.py
-/__pycache__
+*
+*/
+
+!/minecraft-auto-backup.py

@@ -11,6 +11,7 @@ minecraft_world_path = ""
 backup_parent_path = ""
 max_backups = DEFAULT_MAX_BACKUPS
 backup_trigger_event = "stop_recording"
+script_enabled = False
 
 def get_timestamp():
     return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -25,6 +26,9 @@ def list_backup_files(backup_path):
     return backup_files
 
 def backup_minecraft_world(minecraft_world_path, backup_parent_path, max_backups):
+    if not script_enabled:
+        return
+
     if not minecraft_world_path:
         obs.script_log(obs.LOG_WARNING,"You haven't specified the path to your Minecraft world.")
         return
@@ -57,6 +61,9 @@ def on_event(event):
     global max_backups
     global backup_trigger_event
 
+    if not script_enabled:
+        return
+
     if event == obs.OBS_FRONTEND_EVENT_STREAMING_STOPPED and backup_trigger_event == "stop_streaming":
         backup_minecraft_world(minecraft_world_path, backup_parent_path, max_backups)
     elif event == obs.OBS_FRONTEND_EVENT_RECORDING_STOPPED and backup_trigger_event == "stop_recording":
@@ -68,9 +75,14 @@ def script_description():
 def script_properties():
 
     props = obs.obs_properties_create()
+    
+
+    checkbox = obs.obs_properties_add_bool(props, "script_enabled", "Enable/disable script")
+    obs.obs_property_set_long_description(checkbox, "Checked when on, unchecked when off.")
+    
     obs.obs_properties_add_path(props, "minecraft_world_path", "Path to world folder:", obs.OBS_PATH_DIRECTORY, "", None)
     obs.obs_properties_add_path(props, "backup_parent_path", "Path to backup folder:", obs.OBS_PATH_DIRECTORY, "", None)
-    obs.obs_properties_add_int(props, "max_backups", "Maximum backupok száma:", MIN_BACKUPS, MAX_BACKUPS_LIMIT, 1)
+    obs.obs_properties_add_int_slider(props, "max_backups", "Number of maximum backups", MIN_BACKUPS, MAX_BACKUPS_LIMIT, 1)
 
     backup_event_menu = obs.obs_properties_add_list(props, "backup_trigger_event", "Make backup on:", obs.OBS_COMBO_TYPE_LIST, obs.OBS_COMBO_FORMAT_STRING)
     obs.obs_property_list_add_string(backup_event_menu, "Stop Streaming", "stop_streaming")
@@ -84,7 +96,9 @@ def script_update(settings):
     global backup_parent_path
     global max_backups
     global backup_trigger_event
+    global script_enabled
 
+    script_enabled = obs.obs_data_get_bool(settings, "script_enabled")
     minecraft_world_path = obs.obs_data_get_string(settings, "minecraft_world_path")
     backup_parent_path = obs.obs_data_get_string(settings, "backup_parent_path")
     max_backups = obs.obs_data_get_int(settings, "max_backups")

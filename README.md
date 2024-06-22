@@ -1,7 +1,7 @@
 # Automatic World Backup script for OBS
 <div align="center">
   
-  [![Badge License]][License]  [![Badge PyVersion]][#] 
+  [![Badge License]][License]  [![Badge PyVersion]][#] [![Badge OBS]][#]
       
 </div>
 
@@ -19,4 +19,5 @@ For the ones who say `"ew, it's written in python"` stfu, it's either python or 
 <!---------------------------------[ Badges ]---------------------------------->
 
 [Badge License]: https://img.shields.io/badge/License-MIT-ffb03b?style=plastic
-[Badge PyVersion]: https://img.shields.io/badge/%E2%89%A5_3.11-white?style=plastic&logo=python&logoColor=white&labelColor=%233773a5&color=%23fece3c
+[Badge PyVersion]: https://img.shields.io/badge/Python_Version-%E2%89%A5_3.11-white?style=plastic&logo=python&logoColor=white&labelColor=%233773a5&color=%23fece3c
+[Badge OBS]: https://img.shields.io/badge/OBS_Version-v30.x-white?style=flat&logo=obsstudio&logoColor=%23cfd1ce&labelColor=%23302E31

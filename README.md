@@ -1,4 +1,4 @@
-# Automatic World Backup script for OBS
+<h1 align="center"> Automatic World Backup script for OBS </h1>
 <div align="center">
   
   [![Badge License]][License]  [![Badge PyVersion]][#] [![Badge OBS]][#]
